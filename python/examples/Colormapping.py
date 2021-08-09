@@ -22,7 +22,7 @@ LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
 # Gradient settings
 
-gradient_list = ["/gradient_logo.jpg"]
+gradient_list = ["gradient_logo.jpg"]
 speed = 100                                         # in %
 
 # color gradient mapping function
