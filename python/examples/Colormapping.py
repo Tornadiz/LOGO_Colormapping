@@ -57,7 +57,8 @@ def rotate_gradient(strip, img_gradient, locations, speed):
     bright = 255
     for k in range(0, LED_COUNT):        
         colormap(strip, img_gradient, locations, k, bright)
-        time.sleep(0.5/(speed/100))              
+        time.sleep(0.5/(speed/100))
+        print("shift nr. " + str(k) + "   __________________________________________________")
         
         
 # # Define functions which animate LEDs in various ways.
