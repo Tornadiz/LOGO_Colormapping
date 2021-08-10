@@ -26,7 +26,7 @@ LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
 # gradient_li = ["gradient_logo.jpg"]
 gradient = "gradient_logo.jpg"
-speed = 100                                         # in %
+speed = 200   # in %
 locations = [(1147,918),(385,1139),(627,841),(819,1321),(1254,939),(364,145),(392,748),(96,1167),(703,1029),(516,173),(145,573),
                 (455,818),(281,258),(1237,1269),(555,1249),(86,296),(1242,228),(41,863),(453,387),(225,102),(32,785),
                 (462,819),(1241,89),(212,1388),(739,1100),(1116,1587),(683,944),(1163,1564),(894,1096),(1268,1529),
@@ -46,14 +46,15 @@ locations = [(1147,918),(385,1139),(627,841),(819,1321),(1254,939),(364,145),(39
 def colormap(strip, img_gradient, locations, shift, brightness):   
         
     for j, (x, y) in enumerate(locations):
-        print("img_gradient[x, y]: ", img_gradient[x, y])
+#         print("img_gradient[x, y]: ", img_gradient[x, y])
         color = Color(int(img_gradient[x, y][0]), int(img_gradient[x, y][1]), int(img_gradient[x, y][2]))
         
         current_LED_num = j + shift        
         
-        if current_LED_num > 149: 
-            current_LED_num = 149 - (j + shift)
+        if current_LED_num > LED_COUNT-1: 
+            current_LED_num = current_LED_num % LED_COUNT
         print("Point " + str(current_LED_num) + ": Color: " + str(color))
+#         print("Point " + str(current_LED_num) + ": Color: " + str(color))
         
         strip.setPixelColor(current_LED_num, color)
         # theaterChase(strip, Color(127, 127, 127))  # White theater chase
@@ -63,7 +64,7 @@ def rotate_gradient(strip, img_gradient, locations, speed):
     bright = 255
     for k in range(0, LED_COUNT):        
         colormap(strip, img_gradient, locations, k, bright)
-        time.sleep(0.5*speed/100)              
+        time.sleep(0.5/(speed/100))              
         
         
 # # Define functions which animate LEDs in various ways.
