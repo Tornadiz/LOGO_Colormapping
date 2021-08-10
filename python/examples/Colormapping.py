@@ -159,8 +159,7 @@ if __name__ == '__main__':
     if not args.clear:
         print('Use "-c" argument to clear LEDs on exit')
     
-    i=0
-    k=0
+    i=0    
     
     path_mainfolder = getcwd()
     try:
@@ -168,8 +167,8 @@ if __name__ == '__main__':
         grad_img_2_folder = path_mainfolder + "/" + gradient_2
         image_grad = imread(grad_img_folder)
         image_grad_2 = imread(grad_img_2_folder)
-        col_map_1 = colormap(strip, image_grad, locations, k, bright)
-        col_map_2 = colormap(strip, image_grad_2, locations, k, bright)
+        col_map_1 = colormap(strip, image_grad, locations, 0, 255)
+        col_map_2 = colormap(strip, image_grad_2, locations, 0, 255)
         while True:
 #             if i > len(gradient_li):
 #                 i = 0
