@@ -48,11 +48,15 @@ def colormap(strip, img_gradient, locations, shift, brightness):
     for j, (x, y) in enumerate(locations):
         print("img_gradient[x, y]: ", img_gradient[x, y])
         color = Color(img_gradient[x, y][0], img_gradient[x, y][1], img_gradient[x, y][2])
-        print("Point " + str(j) + ": Color: " + str(color))
-        current_LED_num = j + shift
+        
+        current_LED_num = j + shift        
+        
         if current_LED_num > 149: 
             current_LED_num = 149 - (j + shift)
+        print("Point " + str(current_LED_num) + ": Color: " + str(color))
+        
         strip.setPixelColor(current_LED_num, color)
+        # theaterChase(strip, Color(127, 127, 127))  # White theater chase
         
 # gradient animation functions      
 def rotate_gradient(strip, img_gradient, locations, speed):
