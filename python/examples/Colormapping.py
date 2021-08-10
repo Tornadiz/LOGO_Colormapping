@@ -43,11 +43,11 @@ locations = [(1147,918),(385,1139),(627,841),(819,1321),(1254,939),(364,145),(39
                 (937,1315),(864,1311),(242,1269),(223,156),(1097,1334),(1152,1299),(384,1216),(996,868),(215,776),
                 (4,1662),(1085,820),(1171,1328),(162,1432),(844,41),(461,239),(513,1420),(926,1167)]
 # color gradient mapping function
-def colormap(img_gradient, locations, shift, brightness):   
+def colormap(strip, img_gradient, locations, shift, brightness):   
         
     for j, (x, y) in enumerate(locations):
         print("img_gradient[x, y]: ", img_gradient[x, y])
-        color = (img_gradient[x, y][0], img_gradient[x, y][1], img_gradient[x, y][2])
+        color = Color(img_gradient[x, y][0], img_gradient[x, y][1], img_gradient[x, y][2])
         print("Point " + str(j) + ": Color: " + str(color))
         current_LED_num = j + shift
         if current_LED_num > 149: 
@@ -55,10 +55,10 @@ def colormap(img_gradient, locations, shift, brightness):
         strip.setPixelColor(current_LED_num, color)
         
 # gradient animation functions      
-def rotate_gradient(img_gradient, locations, speed):
+def rotate_gradient(strip, img_gradient, locations, speed):
     bright = 255
     for k in range(0, LED_COUNT):        
-        colormap(img_gradient, locations, k, bright)
+        colormap(strip, img_gradient, locations, k, bright)
         time.sleep(0.5*speed)              
         
         
@@ -149,10 +149,12 @@ if __name__ == '__main__':
             grad_img_folder = path_mainfolder + "/" + gradient
             print("grad_img_folder: ", grad_img_folder)  
             image_grad = cv2.imread(grad_img_folder)
+        
+                  # theaterChase(strip, Color(127, 127, 127))  # White theater chase
 
             print ('gradient_list(' + str(i) + ') now playing')
         
-            rotate_gradient(image_grad, locations, speed)
+            rotate_gradient(strip, image_grad, locations, speed)
             
 #             i =+ 1
 
