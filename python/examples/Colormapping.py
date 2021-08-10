@@ -12,6 +12,7 @@ from cv2 import imread
 import numpy as np
 from os import getcwd
 from loc import locations
+import copy
 
 # LED strip configuration:
 LED_COUNT      = 149      # Number of LED pixels.
@@ -78,7 +79,7 @@ def rotate_gradient(strip, img_gradient, locations, speed):
     for k in range(0, LED_COUNT):
         col_map_old = colormap(strip, img_gradient, locations, k, bright)
         print("col_map_old before: ", col_map_old)
-        col_map_new = col_map_old
+        col_map_new = copy.deepcopy(col_map_old)
         print("col_map_new before: ", col_map_new)
 
         col_map_new.append(col_map_new.pop(0))
