@@ -47,7 +47,7 @@ def colormap(strip, img_gradient, locations, shift, brightness):
         
     for j, (x, y) in enumerate(locations):
         print("img_gradient[x, y]: ", img_gradient[x, y])
-        color = Color(img_gradient[x, y][0], img_gradient[x, y][1], img_gradient[x, y][2])
+        color = Color(int(img_gradient[x, y][0]), int(img_gradient[x, y][1]), int(img_gradient[x, y][2]))
         
         current_LED_num = j + shift        
         
