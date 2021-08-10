@@ -45,7 +45,7 @@ def colormap(strip, img_gradient, locations, shift, brightness):
         
         if current_LED_num > LED_COUNT-1: 
             current_LED_num = current_LED_num % LED_COUNT
-#         print("Point " + str(current_LED_num) + ": Color: " + str(color))
+        print("Point " + str(current_LED_num) + ": Color: " + str(color))
 #         print("Point " + str(current_LED_num) + ": Color: " + str(color))
         
         strip.setPixelColor(current_LED_num, color)
@@ -57,7 +57,7 @@ def rotate_gradient(strip, img_gradient, locations, speed):
     bright = 255
     for k in range(0, LED_COUNT):        
         colormap(strip, img_gradient, locations, k, bright)
-#         time.sleep(0.5/(speed/100))              
+        time.sleep(0.5/(speed/100))              
         
         
 # # Define functions which animate LEDs in various ways.
