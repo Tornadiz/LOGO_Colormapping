@@ -28,11 +28,10 @@ LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 # gradient_li = ["gradient_logo.jpg"]
 gradient = "gradient_logo_small.jpg"
 gradient_2 = "gradient_logo_2_small.jpg"
-speed = 500   # in %
+speed = 100   # in %
 
 def illuminate_all_pos(calc_colors):
         for [pos, col] in calc_colors:
-                print("pos: " + str(pos) + ", col: " + str(col))
                 strip.setPixelColor(pos, Color(col[0], col[1], col[2]))
         strip.show()   
 
@@ -53,7 +52,8 @@ def colormap(strip, img_gradient, locations, shift, brightness):
             current_LED_num = current_LED_num % LED_COUNT
         calc_color.append([current_LED_num, color])
         
-    return calc_color        
+    return calc_color   
+
 
 # fade between colors     
 def fade_gradient(strip, img_gradient_1, img_gradient_2, locations, speed):
@@ -61,7 +61,7 @@ def fade_gradient(strip, img_gradient_1, img_gradient_2, locations, speed):
     k = 0
     col_map_1 = colormap(strip, img_gradient_1, locations, k, bright)
     col_map_2 = colormap(strip, img_gradient_2, locations, k, bright)
-    fade_dist =  int(100/(speed/100))
+    fade_dist =  30
     for counter in range(0, fade_dist):
         col_map_inter = []
         for led_count, _ in enumerate(col_map_1):
@@ -73,13 +73,17 @@ def fade_gradient(strip, img_gradient_1, img_gradient_2, locations, speed):
         illuminate_all_pos(col_map_inter)
         time.sleep(0.5/(speed/100))
         
+        
 # gradient animation functions      
 def rotate_gradient(strip, img_gradient, locations, speed):
     bright = 255
-    for k in range(0, LED_COUNT):        
-        col_map = colormap(strip, img_gradient, locations, k, bright)
-        illuminate_all_pos(color_map)
-        time.sleep(0.5/(speed/100))
+    for k in range(0, LED_COUNT):
+        col_map_new = colormap(strip, img_gradient, locations, k, bright)
+        if k > 0:
+                col_map_old = colormap(strip, img_gradient, locations, k-1, bright)        
+                fade_gradient(strip, col_map_old, col_map_new, locations, speed*5)
+#                 illuminate_all_pos(color_map)
+                time.sleep(0.5/(speed/100))
         
         
 # # Define functions which animate LEDs in various ways.
