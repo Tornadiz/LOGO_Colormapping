@@ -135,8 +135,8 @@ if __name__ == '__main__':
     try:
         
         while True:
-            if i > len(gradient_li):
-                i = 0
+#             if i > len(gradient_li):
+#                 i = 0
             
 #             image_grad = cv2.imread(gradient_li(i))
             image_grad = cv2.imread(gradient)
@@ -145,7 +145,7 @@ if __name__ == '__main__':
         
             rotate_gradient(image_grad, locations, speed)
             
-            i =+ 1
+#             i =+ 1
 
     except KeyboardInterrupt:
         if args.clear:
