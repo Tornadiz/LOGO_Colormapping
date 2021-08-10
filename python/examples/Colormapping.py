@@ -9,6 +9,7 @@ import time
 from rpi_ws281x import *
 import argparse
 import cv2
+import numpy as np
 
 # LED strip configuration:
 LED_COUNT      = 149      # Number of LED pixels.
@@ -23,7 +24,7 @@ LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 # Gradient settings
 
 # gradient_li = ["gradient_logo.jpg"]
-gradient = "/gradient_logo.jpg"
+gradient = "gradient_logo.jpg"
 speed = 100                                         # in %
 locations = [(1147,918),(385,1139),(627,841),(819,1321),(1254,939),(364,145),(392,748),(96,1167),(703,1029),(516,173),(145,573),
                 (455,818),(281,258),(1237,1269),(555,1249),(86,296),(1242,228),(41,863),(453,387),(225,102),(32,785),
@@ -133,6 +134,8 @@ if __name__ == '__main__':
         print('Use "-c" argument to clear LEDs on exit')
     
     i=0
+    
+    path_mainfolder = os.getcwd()
     try:
         
         while True:
@@ -140,7 +143,10 @@ if __name__ == '__main__':
 #                 i = 0
             
 #             image_grad = cv2.imread(gradient_li(i))
-            image_grad = cv2.imread(gradient)
+            print("path_mainfolder: ", path_mainfolder)  
+            grad_img_folder = path_mainfolder + "/" + gradient
+            print("grad_img_folder: ", grad_img_folder)  
+            image_grad = cv2.imread(grad_img_folder)
 
             print ('gradient_list(' + str(i) + ') now playing')
         
