@@ -53,7 +53,7 @@ def colormap(img_gradient, locations, shift, brightness):
 # gradient animation functions      
 def rotate_gradient(img_gradient, locations, speed):
     bright = 255
-    for k in LED_COUNT:        
+    for k in range(0, LED_COUNT):        
         colormap(img_gradient, locations, k, bright)
         time.sleep(0.5*speed)              
         
