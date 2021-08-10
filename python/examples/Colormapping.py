@@ -182,7 +182,7 @@ if __name__ == '__main__':
 
 #             print ('gradient_list(' + str(i) + ') now playing')
         
-#             rotate_gradient(strip, image_grad, locations, speed)
+            rotate_gradient(strip, image_grad, locations, speed)
             fade_gradient(strip, image_grad, image_grad_2, locations, speed)
             fade_gradient(strip, image_grad_2, image_grad, locations, speed)
 #             i =+ 1
