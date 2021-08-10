@@ -56,11 +56,7 @@ def colormap(strip, img_gradient, locations, shift, brightness):
 
 
 # fade between colors     
-def fade_gradient(strip, img_gradient_1, img_gradient_2, locations, speed):
-    bright = 255
-    k = 0
-    col_map_1 = colormap(strip, img_gradient_1, locations, k, bright)
-    col_map_2 = colormap(strip, img_gradient_2, locations, k, bright)
+def fade_gradient(strip, col_map_1, col_map_2, locations, speed):   
     fade_dist =  30
     for counter in range(0, fade_dist):
         col_map_inter = []
@@ -171,6 +167,8 @@ if __name__ == '__main__':
         grad_img_2_folder = path_mainfolder + "/" + gradient_2
         image_grad = imread(grad_img_folder)
         image_grad_2 = imread(grad_img_2_folder)
+        col_map_1 = colormap(strip, image_grad, locations, k, bright)
+        col_map_2 = colormap(strip, image_grad_2, locations, k, bright)
         while True:
 #             if i > len(gradient_li):
 #                 i = 0
@@ -183,7 +181,8 @@ if __name__ == '__main__':
 #             print ('gradient_list(' + str(i) + ') now playing')
         
             rotate_gradient(strip, image_grad, locations, speed)
-            fade_gradient(strip, image_grad, image_grad_2, locations, speed)
+
+            fade_gradient(strip, col_map_1, col_map_2, locations, speed)
             fade_gradient(strip, image_grad_2, image_grad, locations, speed)
 #             i =+ 1
 
