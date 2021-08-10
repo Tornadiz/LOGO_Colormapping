@@ -63,7 +63,7 @@ def fade_gradient(strip, img_gradient_1, img_gradient_2, locations, speed):
     fade_dist =  int(100/(speed/100))
     for counter in range(0, fade_dist):
         col_map_inter = []
-        for led_count in enumerate(col_map_1):
+        for led_count, _ in enumerate(col_map_1):
                 print("RED 1: " + str(col_map_1[led_count][1][0]) + ", RED 2: " + str(col_map_2[led_count][1][0]))
                 R_inter = int(col_map_1[led_count][1][0] + counter/fade_dist*(col_map_2[led_count][1][0] - col_map_1[led_count][1][0]))
                 G_inter = int(col_map_1[led_count][1][1] + counter/fade_dist*(col_map_2[led_count][1][1] - col_map_1[led_count][1][1]))
