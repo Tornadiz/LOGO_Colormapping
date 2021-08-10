@@ -74,15 +74,16 @@ def fade_gradient(strip, col_map_1, col_map_2, locations, speed):
 # gradient animation functions      
 def rotate_gradient(strip, img_gradient, locations, speed):
     bright = 255
-    col_map_old = colormap(strip, img_gradient, locations, 0, bright)
+    col_map_old = []
     for k in range(0, LED_COUNT):
-        col_map_new = colormap(strip, img_gradient, locations, k+1, bright)
-        if k > 0: 
-                print("old: " + str(col_map_old[0]) + ", new: " + str(col_map_new[0]) + "____________________________________________________________________")
-                fade_gradient(strip, col_map_old, col_map_new, locations, speed*20)
-                col_map_old = colormap(strip, img_gradient, locations, k, bright)
+        col_map_new = colormap(strip, img_gradient, locations, k, bright)
+        for en_count, entry in enumerate(col_map_new):
+                col_map_old.append([entry[en_count][0], entry[en_count-1][1]])
+        print("old: " + str(col_map_old[0]) + ", new: " + str(col_map_new[0]) + "____________________________________________________________________")
+        fade_gradient(strip, col_map_old, col_map_new, locations, speed*20)
+        col_map_old = colormap(strip, img_gradient, locations, k, bright)
 #                 illuminate_all_pos(color_map)
-                time.sleep(0.5/(speed/100))
+        time.sleep(0.5/(speed/100))
         
         
 # # Define functions which animate LEDs in various ways.
