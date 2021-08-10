@@ -78,9 +78,7 @@ def rotate_gradient(strip, img_gradient, locations, speed):
     col_map_old = []
     for k in range(0, LED_COUNT):
         col_map_old = colormap(strip, img_gradient, locations, k, bright)
-        print("col_map_old before: ", col_map_old[0])
         col_map_new = copy.deepcopy(col_map_old)
-        print("col_map_new before: ", col_map_new[0])
 
         col_map_new.append(col_map_new.pop(0))
         for en_counter, entry in enumerate(col_map_new):
