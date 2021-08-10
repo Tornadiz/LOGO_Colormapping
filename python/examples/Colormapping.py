@@ -46,6 +46,7 @@ locations = [(1147,918),(385,1139),(627,841),(819,1321),(1254,939),(364,145),(39
 def colormap(img_gradient, locations, shift, brightness):   
         
     for j, (x, y) in enumerate(locations):
+        print("img_gradient[x, y]: ", img_gradient[x, y])
         color = int(img_gradient[x, y])
         print("Point " + str(j) + ": Color: " + str(color))
         current_LED_num = j + shift
