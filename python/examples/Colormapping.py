@@ -9,7 +9,7 @@ import time
 from rpi_ws281x import *
 import argparse
 from cv2 import imread
-# import numpy as np
+import numpy as np
 from os import getcwd
 from loc import locations
 
@@ -27,38 +27,58 @@ LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
 # gradient_li = ["gradient_logo.jpg"]
 gradient = "gradient_logo_small.jpg"
-speed = 500   # in 
-print("locations: ", locations)
+speed = 500   # in %
+
+def illuminate_all_pos(calc_colors):
+        for pos, col in enumerate(calc_colors):
+                strip.setPixelColor(pos, color(col))
+        strip.show()   
 
 # color gradient mapping function
 def colormap(strip, img_gradient, locations, shift, brightness):   
-        
+    calc_color = []    
     for j, (x, y) in enumerate(locations):
 #         print("img_gradient[x, y]: ", img_gradient[x, y])
         
         B = int(img_gradient[x, y][0])
         G = int(img_gradient[x, y][1])
         R = int(img_gradient[x, y][2])
-        color = Color(R, G, B)
+        color = (R, G, B)
         
         current_LED_num = j + shift        
         
         if current_LED_num > LED_COUNT-1: 
             current_LED_num = current_LED_num % LED_COUNT
-        print("Point " + str(current_LED_num) + ": Color: " + str(color))
-#         print("Point " + str(current_LED_num) + ": Color: " + str(color))
+        calc_color.append([current_LED_num, color])
         
-        strip.setPixelColor(current_LED_num, color)
-    strip.show()
-    # theaterChase(strip, Color(127, 127, 127))  # White theater chase
+    return calc_color
+        
+        
+
+# fade between colors     
+def fade_gradient(strip, img_gradient_1, img_gradient_2, locations, speed):
+    bright = 255
+    k = 0
+    col_map_1 = colormap(strip, img_gradient_1, locations, k, bright)
+    col_map_2 = colormap(strip, img_gradient_2, locations, k, bright)
+    fade_dist =  100/(speed/100)   
+    for counter in range(0, fade_dist):
+        col_map_inter = []
+        for led_count in enumerate(col_map_1):
+                R_inter = int(col_map_1[led_count][1][0] + counter/fade_dist*(col_map_1[led_count][2][0] - col_map_1[led_count][1][0]))
+                G_inter = int(col_map_1[led_count][1][1] + counter/fade_dist*(col_map_1[led_count][2][1] - col_map_1[led_count][1][1]))
+                B_inter = int(col_map_1[led_count][1][2] + counter/fade_dist*(col_map_1[led_count][2][2] - col_map_1[led_count][1][2]))
+                col_map_inter.append([col_map_1[led_count][0], (R_inter, G_inter, B_inter)])
+        illuminate_all_pos(col_map_inter)
+        time.sleep(0.5/(speed/100))
         
 # gradient animation functions      
 def rotate_gradient(strip, img_gradient, locations, speed):
     bright = 255
     for k in range(0, LED_COUNT):        
-        colormap(strip, img_gradient, locations, k, bright)
+        col_map = colormap(strip, img_gradient, locations, k, bright)
+        illuminate_all_pos(color_map)
         time.sleep(0.5/(speed/100))
-        print("shift nr. " + str(k) + "   __________________________________________________")
         
         
 # # Define functions which animate LEDs in various ways.
@@ -80,6 +100,10 @@ def colorWipe(strip, color, wait_ms=50):
 #             for i in range(0, strip.numPixels(), 3):
 #                 strip.setPixelColor(i+q, 0)
 
+
+    # theaterChase(strip, Color(127, 127, 127))  # White theater chase
+
+        
 # def wheel(pos):
 #     """Generate rainbow colors across 0-255 positions."""
 #     if pos < 85:
