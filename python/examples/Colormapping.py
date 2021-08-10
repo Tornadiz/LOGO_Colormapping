@@ -10,7 +10,7 @@ from rpi_ws281x import *
 import argparse
 from cv2 import imread
 # import numpy as np
-import os
+from os import getcwd
 from loc import locations
 
 # LED strip configuration:
@@ -150,7 +150,7 @@ if __name__ == '__main__':
     
     i=0
     
-    path_mainfolder = os.getcwd()
+    path_mainfolder = getcwd()
     try:
         
         while True:
@@ -161,7 +161,7 @@ if __name__ == '__main__':
             print("path_mainfolder: ", path_mainfolder)  
             grad_img_folder = path_mainfolder + "/" + gradient
             print("grad_img_folder: ", grad_img_folder)  
-            image_grad = cv2.imread(grad_img_folder)
+            image_grad = imread(grad_img_folder)
         
                   # theaterChase(strip, Color(127, 127, 127))  # White theater chase
 
