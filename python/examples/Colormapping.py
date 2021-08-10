@@ -52,9 +52,7 @@ def colormap(strip, img_gradient, locations, shift, brightness):
             current_LED_num = current_LED_num % LED_COUNT
         calc_color.append([current_LED_num, color])
         
-    return calc_color
-        
-        
+    return calc_color        
 
 # fade between colors     
 def fade_gradient(strip, img_gradient_1, img_gradient_2, locations, speed):
@@ -62,7 +60,7 @@ def fade_gradient(strip, img_gradient_1, img_gradient_2, locations, speed):
     k = 0
     col_map_1 = colormap(strip, img_gradient_1, locations, k, bright)
     col_map_2 = colormap(strip, img_gradient_2, locations, k, bright)
-    fade_dist =  100/(speed/100)   
+    fade_dist =  int(100/(speed/100))
     for counter in range(0, fade_dist):
         col_map_inter = []
         for led_count in enumerate(col_map_1):
