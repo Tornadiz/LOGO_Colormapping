@@ -60,8 +60,9 @@ def fade_gradient(strip, col_map_1, col_map_2, locations, speed):
     fade_dist =  30
     for counter in range(0, fade_dist):
         col_map_inter = []
-        for led_count, _ in enumerate(col_map_1):
+        for led_count, _ in enumerate(col_map_1):                
                 R_inter = int(col_map_1[led_count][1][0] + counter/fade_dist*(col_map_2[led_count][1][0] - col_map_1[led_count][1][0]))
+                print("R1: " + str(col_map_1[led_count][1][0]) + "R2: " + str(col_map_2[led_count][1][0]) + "Rinter: " + str(R_inter))
                 G_inter = int(col_map_1[led_count][1][1] + counter/fade_dist*(col_map_2[led_count][1][1] - col_map_1[led_count][1][1]))
                 B_inter = int(col_map_1[led_count][1][2] + counter/fade_dist*(col_map_2[led_count][1][2] - col_map_1[led_count][1][2]))
                 ins = [col_map_1[led_count][0], (R_inter, G_inter, B_inter)]
@@ -183,7 +184,7 @@ if __name__ == '__main__':
             rotate_gradient(strip, image_grad, locations, speed)
 
             fade_gradient(strip, col_map_1, col_map_2, locations, speed)
-            fade_gradient(strip, image_grad_2, image_grad, locations, speed)
+            fade_gradient(strip, col_map_2, col_map_1, locations, speed)
 #             i =+ 1
 
     except KeyboardInterrupt:
