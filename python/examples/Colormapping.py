@@ -33,7 +33,7 @@ speed = 500   # in %
 def illuminate_all_pos(calc_colors):
         for [pos, col] in calc_colors:
                 print("pos: " + str(pos) + ", col: " + str(col))
-                strip.setPixelColor(pos, Color(col))
+                strip.setPixelColor(pos, Color(col[0], col[1], col[2]))
         strip.show()   
 
 # color gradient mapping function
