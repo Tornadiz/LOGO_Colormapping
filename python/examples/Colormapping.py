@@ -27,6 +27,7 @@ LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
 # gradient_li = ["gradient_logo.jpg"]
 gradient = "gradient_logo_small.jpg"
+gradient_2 = "gradient_logo_2_small.jpg"
 speed = 500   # in %
 
 def illuminate_all_pos(calc_colors):
@@ -162,23 +163,24 @@ if __name__ == '__main__':
     
     path_mainfolder = getcwd()
     try:
-        
+        grad_img_folder = path_mainfolder + "/" + gradient
+        grad_img_2_folder = path_mainfolder + "/" + gradient_2
+        image_grad = imread(grad_img_folder)
+        image_grad_2 = imread(grad_img_2_folder)
         while True:
 #             if i > len(gradient_li):
 #                 i = 0
             
 #             image_grad = cv2.imread(gradient_li(i))
-            print("path_mainfolder: ", path_mainfolder)  
-            grad_img_folder = path_mainfolder + "/" + gradient
-            print("grad_img_folder: ", grad_img_folder)  
-            image_grad = imread(grad_img_folder)
+            
         
                   # theaterChase(strip, Color(127, 127, 127))  # White theater chase
 
 #             print ('gradient_list(' + str(i) + ') now playing')
         
-            rotate_gradient(strip, image_grad, locations, speed)
-            
+#             rotate_gradient(strip, image_grad, locations, speed)
+            fade_gradient(strip, image_grad, image_grad_2, locations, speed)
+            fade_gradient(strip, image_grad_2, image_grad, locations, speed)
 #             i =+ 1
 
     except KeyboardInterrupt:
