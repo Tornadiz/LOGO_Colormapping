@@ -8,10 +8,10 @@
 import time
 from rpi_ws281x import *
 import argparse
-import cv2
-import numpy as np
+from cv2 import imread
+# import numpy as np
 import os
-import loc
+from loc import locations
 
 # LED strip configuration:
 LED_COUNT      = 149      # Number of LED pixels.
