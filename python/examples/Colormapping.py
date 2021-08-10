@@ -77,9 +77,10 @@ def rotate_gradient(strip, img_gradient, locations, speed):
     col_map_old = []
     for k in range(0, LED_COUNT):
         col_map_new = colormap(strip, img_gradient, locations, k, bright)
+        print("col_map_new: ", col_map_new)
         for en_count, entry in enumerate(col_map_new):
                 col_map_old.append([entry[en_count][0], entry[en_count-1][1]])
-        print("old: " + str(col_map_old[0]) + ", new: " + str(col_map_new[0]) + "____________________________________________________________________")
+        print("old: " + str(col_map_old[0]) + ", new: " + str(col_map_new[0]))
         fade_gradient(strip, col_map_old, col_map_new, locations, speed*20)
         col_map_old = colormap(strip, img_gradient, locations, k, bright)
 #                 illuminate_all_pos(color_map)
