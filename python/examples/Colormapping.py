@@ -32,6 +32,7 @@ speed = 500   # in %
 
 def illuminate_all_pos(calc_colors):
         for pos, col in enumerate(calc_colors):
+                print("pos: "+ str(pos) + ", col: " + str(col))
                 strip.setPixelColor(pos, Color(col))
         strip.show()   
 
