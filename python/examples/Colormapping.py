@@ -87,7 +87,7 @@ def rotate_gradient(strip, img_gradient, locations, speed):
         print("col_map_old after: ", col_map_old[0])
 
 #         print("old: " + str(col_map_old[0]) + ", new: " + str(col_map_new[0]))
-        fade_gradient(strip, col_map_old, col_map_new, locations, speed*20)
+        fade_gradient(strip, col_map_new, col_map_old, locations, speed*20)
 #                 illuminate_all_pos(color_map)
         time.sleep(0.5/(speed/100))
         
