@@ -27,7 +27,7 @@ LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
 # gradient_li = ["gradient_logo.jpg"]
 gradient = "gradient_logo_small.jpg"
-speed = 300   # in 
+speed = 3000   # in 
 print("locations: ", locations)
 
 # locations = [(1147,918),(385,1139),(627,841),(819,1321),(1254,939),(364,145),(392,748),(96,1167),(703,1029),(516,173),(145,573),
