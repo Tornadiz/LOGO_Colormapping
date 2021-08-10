@@ -31,8 +31,7 @@ gradient_2 = "gradient_logo_2_small.jpg"
 speed = 500   # in %
 
 def illuminate_all_pos(calc_colors):
-        for pos, col in enumerate(calc_colors):
-                print("pos: "+ str(pos) + ", col: " + str(col))
+        for [pos, col] in calc_colors:
                 strip.setPixelColor(pos, Color(col))
         strip.show()   
 
@@ -65,12 +64,10 @@ def fade_gradient(strip, img_gradient_1, img_gradient_2, locations, speed):
     for counter in range(0, fade_dist):
         col_map_inter = []
         for led_count, _ in enumerate(col_map_1):
-                print("RED 1: " + str(col_map_1[led_count][1][0]) + ", RED 2: " + str(col_map_2[led_count][1][0]))
                 R_inter = int(col_map_1[led_count][1][0] + counter/fade_dist*(col_map_2[led_count][1][0] - col_map_1[led_count][1][0]))
                 G_inter = int(col_map_1[led_count][1][1] + counter/fade_dist*(col_map_2[led_count][1][1] - col_map_1[led_count][1][1]))
                 B_inter = int(col_map_1[led_count][1][2] + counter/fade_dist*(col_map_2[led_count][1][2] - col_map_1[led_count][1][2]))
                 ins = [col_map_1[led_count][0], (R_inter, G_inter, B_inter)]
-                print("ins: ", ins)
                 col_map_inter.append(ins)
         illuminate_all_pos(col_map_inter)
         time.sleep(0.5/(speed/100))
