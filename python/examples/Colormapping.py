@@ -69,7 +69,9 @@ def fade_gradient(strip, img_gradient_1, img_gradient_2, locations, speed):
                 R_inter = int(col_map_1[led_count][1][0] + counter/fade_dist*(col_map_2[led_count][1][0] - col_map_1[led_count][1][0]))
                 G_inter = int(col_map_1[led_count][1][1] + counter/fade_dist*(col_map_2[led_count][1][1] - col_map_1[led_count][1][1]))
                 B_inter = int(col_map_1[led_count][1][2] + counter/fade_dist*(col_map_2[led_count][1][2] - col_map_1[led_count][1][2]))
-                col_map_inter.append([col_map_1[led_count][0], (R_inter, G_inter, B_inter)])
+                ins = [col_map_1[led_count][0], (R_inter, G_inter, B_inter)]
+                print("ins: ", ins)
+                col_map_inter.append(ins)
         illuminate_all_pos(col_map_inter)
         time.sleep(0.5/(speed/100))
         
