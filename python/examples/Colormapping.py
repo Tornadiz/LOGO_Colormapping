@@ -47,7 +47,7 @@ def colormap(img_gradient, locations, shift, brightness):
         
     for j, (x, y) in enumerate(locations):
         print("img_gradient[x, y]: ", img_gradient[x, y])
-        color = int(img_gradient[x, y])
+        color = (img_gradient[x, y][0], img_gradient[x, y][1], img_gradient[x, y][2])
         print("Point " + str(j) + ": Color: " + str(color))
         current_LED_num = j + shift
         if current_LED_num > 149: 
