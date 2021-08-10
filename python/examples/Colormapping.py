@@ -10,6 +10,7 @@ from rpi_ws281x import *
 import argparse
 import cv2
 import numpy as np
+import os
 
 # LED strip configuration:
 LED_COUNT      = 149      # Number of LED pixels.
