@@ -160,6 +160,7 @@ if __name__ == '__main__':
         print('Use "-c" argument to clear LEDs on exit')
     
     i=0
+    k=0
     
     path_mainfolder = getcwd()
     try:
