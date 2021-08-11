@@ -43,12 +43,9 @@ def colormap(strip, img_gradient, locations_rel, shift, brightness):
     for j, [num, x_rel, y_rel] in enumerate(locations_rel):
 #         print("img_gradient[x, y]: ", img_gradient[x, y])
 
-        gradient_height, gradient_width, gradient_channels = img_gradient.shape
-        
+        gradient_height, gradient_width, gradient_channels = img_gradient.shape        
         x = int(x_rel * gradient_height)
-        y = int(y_rel * gradient_width)
-        print("x_rel, y_rel, gradient_width, gradient_height, x, y", x_rel, y_rel, gradient_width, gradient_height, x, y)
-        
+        y = int(y_rel * gradient_width)        
         B = int(img_gradient[x, y][0])
         G = int(img_gradient[x, y][1])
         R = int(img_gradient[x, y][2])
@@ -185,7 +182,6 @@ if __name__ == '__main__':
     
     path_mainfolder = getcwd()
     try:
-        print("PATH: " + path_mainfolder + "/gradients/" + gradient_li[0])
         image_grad = imread(path_mainfolder + "/gradients/" + gradient_li[0])
         image_grad_2 = imread(path_mainfolder + "/gradients/"  + gradient_li[1])
         image_grad_3 = imread(path_mainfolder + "/gradients/"  + gradient_li[2])
