@@ -183,19 +183,17 @@ if __name__ == '__main__':
 
     
     path_mainfolder = getcwd()
-    try:
-        grad_img_folder = path_mainfolder + "/" + gradient
-        grad_img_2_folder = path_mainfolder + "/" + gradient_2
-        image_grad = imread("gradients/" + gradient_li[0])
-        image_grad_2 = imread("gradients/" + gradient_li[1])
-        image_grad_3 = imread("gradients/" + gradient_li[2])
-        image_grad_4 = imread("gradients/" + gradient_li[3])
-        image_grad_5 = imread("gradients/" + gradient_li[4])
-        image_grad_6 = imread("gradients/" + gradient_li[5])
-        image_grad_7 = imread("gradients/" + gradient_li[6])
-        image_grad_8 = imread("gradients/" + gradient_li[7])
-        image_grad_9 = imread("gradients/" + gradient_li[8])
-        image_grad_10 = imread("gradients/" + gradient_li[9])
+    try:        
+        image_grad = imread(path_mainfolder + "/gradients/" + gradient_li[0])
+        image_grad_2 = imread(path_mainfolder + "/gradients/"  + gradient_li[1])
+        image_grad_3 = imread(path_mainfolder + "/gradients/"  + gradient_li[2])
+        image_grad_4 = imread(path_mainfolder + "/gradients/"  + gradient_li[3])
+        image_grad_5 = imread(path_mainfolder + "/gradients/"  + gradient_li[4])
+        image_grad_6 = imread(path_mainfolder + "/gradients/"  + gradient_li[5])
+        image_grad_7 = imread(path_mainfolder + "/gradients/"  + gradient_li[6])
+        image_grad_8 = imread(path_mainfolder + "/gradients/"  + gradient_li[7])
+        image_grad_9 = imread(path_mainfolder + "/gradients/"  + gradient_li[8])
+        image_grad_10 = imread(path_mainfolder + "/gradients/"  + gradient_li[9])
         col_map_1 = colormap(strip, image_grad, locations_rel, 0, 255)
         col_map_2 = colormap(strip, image_grad_2, locations_rel, 0, 255)
         col_map_3 = colormap(strip, image_grad_3, locations_rel, 0, 255)
