@@ -8,10 +8,10 @@
 import time
 from rpi_ws281x import *
 import argparse
-from cv2 import imread
+from cv2 import imread, shape
 import numpy as np
 from os import getcwd
-from loc import locations
+from loc import locations, image_width, image_height
 import copy
 
 # LED strip configuration:
@@ -26,10 +26,11 @@ LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
 # Gradient settings
 
-# gradient_li = ["gradient_logo.jpg"]
-gradient = "gradient_logo_small.jpg"
-gradient_2 = "gradient_logo_2_small.jpg"
-speed = 100   # in %
+gradient_li = ["gradient_logo_small.jpg", "gradient_logo_2_small.jpg", "gradient_logo_3_small.jpg", "gradient_logo_4_small.jpg", "gradient_logo_5_small.jpg", "gradient_logo_6_small.jpg", 
+               "gradient_logo_7_small.jpg", "gradient_logo_8_small.jpg", "gradient_logo_9_small.jpg", "gradient_logo_10_small.jpg"]
+# gradient = "gradient_logo_small.jpg"
+# gradient_2 = "gradient_logo_2_small.jpg"
+speed = 500   # in %
 
 def illuminate_all_pos(calc_colors):
         for [pos, col] in calc_colors:
@@ -37,10 +38,15 @@ def illuminate_all_pos(calc_colors):
         strip.show()   
 
 # color gradient mapping function
-def colormap(strip, img_gradient, locations, shift, brightness):   
+def colormap(strip, img_gradient, locations_rel, shift, brightness):   
     calc_color = []    
-    for j, (x, y) in enumerate(locations):
+    for j, [num, x_rel, y_rel] in enumerate(locations_rel):
 #         print("img_gradient[x, y]: ", img_gradient[x, y])
+
+        gradient_height, gradient_width, gradient_channels = img_gradient.shape
+        print("gradient_height, gradient_width ", gradient_height, gradient_width)
+        x = int(x_rel * gradient_width)
+        y = int(y_rel * gradient_height)
         
         B = int(img_gradient[x, y][0])
         G = int(img_gradient[x, y][1])
@@ -57,7 +63,7 @@ def colormap(strip, img_gradient, locations, shift, brightness):
 
 
 # fade between colors     
-def fade_gradient(strip, col_map_1, col_map_2, locations, speed):   
+def fade_gradient(strip, col_map_1, col_map_2, locations_rel, speed):   
     fade_dist =  30
     for counter in range(0, fade_dist):
         col_map_inter = []
@@ -73,11 +79,11 @@ def fade_gradient(strip, col_map_1, col_map_2, locations, speed):
         
         
 # gradient animation functions      
-def rotate_gradient(strip, img_gradient, locations, speed):
+def rotate_gradient(strip, img_gradient, locations_rel, speed):
     bright = 255
     col_map_old = []
     for k in range(0, LED_COUNT):
-        col_map_old = colormap(strip, img_gradient, locations, k, bright)
+        col_map_old = colormap(strip, img_gradient, locations_rel, k, bright)
         col_map_new = copy.deepcopy(col_map_old)
 
         col_map_new.append(col_map_new.pop(0))
@@ -85,7 +91,7 @@ def rotate_gradient(strip, img_gradient, locations, speed):
                 col_map_new[en_counter][0] = col_map_old[en_counter][0]   
 
 #         print("old: " + str(col_map_old[0]) + ", new: " + str(col_map_new[0]))
-        fade_gradient(strip, col_map_new, col_map_old, locations, speed*100)
+        fade_gradient(strip, col_map_new, col_map_old, locations_rel, speed*100)
 #                 illuminate_all_pos(color_map)
 #         time.sleep(0.5/(speed/100))
         
@@ -166,17 +172,43 @@ if __name__ == '__main__':
     print ('Press Ctrl-C to quit.')
     if not args.clear:
         print('Use "-c" argument to clear LEDs on exit')
-    
+        
+    locations_rel = []
+    for [pos, x_raw, y_raw] in locations:
+                x_rel = x_raw / image_width
+                y_rel = y_raw / image_height
+                locations_rel.append([pos, x_rel, y_rel])
     i=0    
+        
+
     
     path_mainfolder = getcwd()
     try:
         grad_img_folder = path_mainfolder + "/" + gradient
         grad_img_2_folder = path_mainfolder + "/" + gradient_2
-        image_grad = imread(grad_img_folder)
-        image_grad_2 = imread(grad_img_2_folder)
-        col_map_1 = colormap(strip, image_grad, locations, 0, 255)
-        col_map_2 = colormap(strip, image_grad_2, locations, 0, 255)
+        image_grad = imread("gradients/" + gradient_li[0])
+        image_grad_2 = imread("gradients/" + gradient_li[1])
+        image_grad_3 = imread("gradients/" + gradient_li[2])
+        image_grad_4 = imread("gradients/" + gradient_li[3])
+        image_grad_5 = imread("gradients/" + gradient_li[4])
+        image_grad_6 = imread("gradients/" + gradient_li[5])
+        image_grad_7 = imread("gradients/" + gradient_li[6])
+        image_grad_8 = imread("gradients/" + gradient_li[7])
+        image_grad_9 = imread("gradients/" + gradient_li[8])
+        image_grad_10 = imread("gradients/" + gradient_li[9])
+        col_map_1 = colormap(strip, image_grad, locations_rel, 0, 255)
+        col_map_2 = colormap(strip, image_grad_2, locations_rel, 0, 255)
+        col_map_3 = colormap(strip, image_grad_3, locations_rel, 0, 255)
+        col_map_4 = colormap(strip, image_grad_4, locations_rel, 0, 255)
+        col_map_5 = colormap(strip, image_grad_5, locations_rel, 0, 255)
+        col_map_6 = colormap(strip, image_grad_6, locations_rel, 0, 255)
+        col_map_7 = colormap(strip, image_grad_7, locations_rel, 0, 255)
+        col_map_8 = colormap(strip, image_grad_8, locations_rel, 0, 255)
+        col_map_9 = colormap(strip, image_grad_9, locations_rel, 0, 255)
+        col_map_10 = colormap(strip, image_grad_10, locations_rel, 0, 255)
+        
+        img_grads = [image_grad, image_grad_2, image_grad_3, image_grad_4, image_grad_5, image_grad_6, image_grad_7, image_grad_8, image_grad_9, image_grad_10]
+        color_maps_li = [col_map_1, col_map_2, col_map_3, col_map_4, col_map_5, col_map_6, col_map_7, col_map_8, col_map_9, col_map_10]
         while True:
 #             if i > len(gradient_li):
 #                 i = 0
@@ -188,10 +220,11 @@ if __name__ == '__main__':
 
 #             print ('gradient_list(' + str(i) + ') now playing')
         
-            rotate_gradient(strip, image_grad, locations, speed)
-
-            fade_gradient(strip, col_map_1, col_map_2, locations, speed)
-            fade_gradient(strip, col_map_2, col_map_1, locations, speed)
+            for map_counter, c_map in enumerate(color_maps_li):
+                rotate_gradient(strip, image_grad, locations_rel, speed)
+                fade_gradient(strip, col_map_1, color_maps_li[map_counter], locations_rel, speed)
+                rotate_gradient(strip, img_grads[map_counter], locations_rel, speed)
+                fade_gradient(strip, color_maps_li[map_counter], col_map_1, locations_rel, speed)
 #             i =+ 1
 
     except KeyboardInterrupt:
