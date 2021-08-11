@@ -45,8 +45,8 @@ def colormap(strip, img_gradient, locations_rel, shift, brightness):
 
         gradient_height, gradient_width, gradient_channels = img_gradient.shape
         
-        x = int(x_rel * gradient_width)
-        y = int(y_rel * gradient_height)
+        x = int(x_rel * gradient_height)
+        y = int(y_rel * gradient_width)
         print("x_rel, y_rel, gradient_width, gradient_height, x, y", x_rel, y_rel, gradient_width, gradient_height, x, y)
         
         B = int(img_gradient[x, y][0])
