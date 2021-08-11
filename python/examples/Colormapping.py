@@ -30,7 +30,7 @@ gradient_li = ["gradient_logo_small.jpg", "gradient_logo_2_small.jpg", "gradient
                "gradient_logo_7_small.jpg", "gradient_logo_8_small.jpg", "gradient_logo_9_small.jpg", "gradient_logo_10_small.jpg"]
 # gradient = "gradient_logo_small.jpg"
 # gradient_2 = "gradient_logo_2_small.jpg"
-speed = 500   # in %
+speed = 5000   # in %
 
 def illuminate_all_pos(calc_colors):
         for [pos, col] in calc_colors:
@@ -62,7 +62,7 @@ def colormap(strip, img_gradient, locations_rel, shift, brightness):
 
 # fade between colors     
 def fade_gradient(strip, col_map_1, col_map_2, locations_rel, speed):   
-    fade_dist =  30
+    fade_dist =  15
     for counter in range(0, fade_dist):
         col_map_inter = []
         for led_count, _ in enumerate(col_map_1):                
