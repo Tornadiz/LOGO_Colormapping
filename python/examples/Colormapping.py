@@ -184,7 +184,7 @@ if __name__ == '__main__':
     
     path_mainfolder = getcwd()
     try:
-        print("PATH: " + path_mainfolder + "/gradients/" + gradient_li[0]
+        print("PATH: " + path_mainfolder + "/gradients/" + gradient_li[0])
         image_grad = imread(path_mainfolder + "/gradients/" + gradient_li[0])
         image_grad_2 = imread(path_mainfolder + "/gradients/"  + gradient_li[1])
         image_grad_3 = imread(path_mainfolder + "/gradients/"  + gradient_li[2])
