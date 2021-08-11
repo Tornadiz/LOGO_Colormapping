@@ -15,7 +15,7 @@ from loc import locations
 import copy
 
 # LED strip configuration:
-LED_COUNT      = 149      # Number of LED pixels.
+LED_COUNT      = 130      # Number of LED pixels.
 LED_PIN        = 18      # GPIO pin connected to the pixels (18 uses PWM!).
 #LED_PIN        = 10      # GPIO pin connected to the pixels (10 uses SPI /dev/spidev0.0).
 LED_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
