@@ -8,10 +8,7 @@
 import time
 from rpi_ws281x import *
 import argparse
-from cv2 import imread
 import numpy as np
-from os import getcwd
-from loc import locations, image_width, image_height
 import copy
 
 # LED strip configuration:
