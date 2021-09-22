@@ -62,7 +62,7 @@ def illuminate_all_pos(calc_colors):
 #     return calc_color   
 
 def shift(img_gradient, shifter):
-  for j in range(0, len(img_gradient)):       
+    for j in range(0, len(img_gradient)):       
         color = img_gradient[j][1]
         
         current_LED_num = j + shifter        
