@@ -62,6 +62,7 @@ def illuminate_all_pos(calc_colors):
 #     return calc_color   
 
 def shift(img_gradient, shifter):
+    calc_color = []    
     for j in range(0, len(img_gradient)):       
         color = img_gradient[j][1]
         
