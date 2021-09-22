@@ -50,7 +50,7 @@ def shift(img_gradient, shifter):
   
 # fade between colors     
 def fade_gradient(strip, col_map_1, col_map_2, speed):   
-    fade_dist =  15
+    fade_dist =  45
     for counter in range(0, fade_dist):
         col_map_inter = []
         for led_count, _ in enumerate(col_map_1):                
@@ -106,7 +106,7 @@ if __name__ == '__main__':
         
     try:
         color_maps_li = gradient_maps_list
-        fade_gradient(strip, empty_map, gradient_map_original, speed/10)
+        fade_gradient(strip, empty_map, gradient_map_original, speed/3)
         while True:
             for map_counter, c_map in enumerate(color_maps_li):
                 rotate_gradient(strip, gradient_map_original, speed)
